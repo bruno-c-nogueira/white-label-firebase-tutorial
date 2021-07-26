@@ -3,7 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
 }
-
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-parcelize'
 
@@ -12,7 +13,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "br.com.douglasmotta.whitelabeltutorial"
+        applicationId "br.com.fulano.whitelabeltutorial"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -36,6 +37,30 @@ android {
     }
     buildFeatures {
         viewBinding true
+    }
+    productFlavors {
+        flavorDimensions 'product', 'side'
+        bike {
+            dimension 'product'
+            applicationIdSuffix '.bike'
+            manifestPlaceholders.appName = "Bike"
+        }
+        car {
+            dimension 'product'
+            applicationIdSuffix '.car'
+            manifestPlaceholders.appName = "Car"
+        }
+        client {
+            dimension 'side'
+            applicationIdSuffix '.client'
+            manifestPlaceholders.appNameSuffix = ""
+
+        }
+        admin {
+            dimension 'side'
+            applicationIdSuffix '.admin'
+            manifestPlaceholders.appNameSuffix = ".Adim"
+        }
     }
 }
 
